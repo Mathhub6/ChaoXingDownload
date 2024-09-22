@@ -37,24 +37,22 @@ jobs:
           name: built-executable
           path: dist/ChaoXingDownload  # 确保此路径为生成的可执行文件路径
 
-      # Step 6: Create a new GitHub release and upload the executable
       - name: Create Release
-        uses: actions/create-release@v2  # 使用最新版本 v2
+        uses: actions/create-release@v2
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}  # 替换为 PAT_TOKEN
         with:
-          tag_name: 'manual-run-${{ github.run_id }}'  # 为每次运行创建独立 tag
+          tag_name: 'manual-run-${{ github.run_id }}'
           release_name: Manual Run Release
           draft: false
           prerelease: false
 
-      # Step 7: Upload Release Asset
       - name: Upload Release Asset
         uses: actions/upload-release-asset@v1
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}  # 替换为 PAT_TOKEN
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: dist/ChaoXingDownload  # 确保路径为打包的可执行文件路径
-          asset_name: ChaoXingDownload  # 你希望上传后的文件名
+          asset_path: dist/ChaoXingDownload
+          asset_name: ChaoXingDownload
           asset_content_type: application/octet-stream
