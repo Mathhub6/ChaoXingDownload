@@ -28,7 +28,7 @@ jobs:
       # Step 4: Use pyinstaller to build the .py file into an executable
       - name: Build executable with PyInstaller
         run: |
-          pyinstaller --onefile your_program.py  # 替换为你的Python文件名
+          pyinstaller --onefile ChaoXingDownload.py  # 替换为你的Python文件名
         # 打包后的文件通常会出现在 dist/ 目录中
 
       # Step 5: Archive the build artifact for upload
@@ -36,7 +36,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: built-executable
-          path: dist/your_program  # 替换为打包后的可执行文件路径
+          path: dist/ChaoXingDownload  # 替换为打包后的可执行文件路径
 
       # Step 6: Create a new GitHub release and upload the executable
       - name: Create Release
@@ -55,6 +55,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: dist/your_program  # 替换为你的打包文件路径
-          asset_name: your_program  # 替换为你希望的文件名
+          asset_path: dist/ChaoXingDownload  # 替换为你的打包文件路径
+          asset_name: ChaoXingDownload  # 替换为你希望的文件名
           asset_content_type: application/octet-stream
